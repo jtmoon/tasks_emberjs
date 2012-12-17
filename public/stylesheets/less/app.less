@@ -1,0 +1,1215 @@
+@import             "reset";
+@import             "dropdowns";
+@import             "popovers";
+@import             "tooltip";
+@import             "modals";
+@import             "mixins";
+
+.gradientDirectional(@bgColor, @overlay, @deg) {
+  background-color: @bgColor;
+  //background-repeat: repeat-x;
+  background-image: -moz-linear-gradient(@deg, @overlay 25%, transparent 25%, transparent 50%, @overlay 50%, @overlay 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(@deg, @overlay 25%, transparent 25%, transparent 50%, @overlay 50%, @overlay 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(@deg, @overlay 25%, transparent 25%, transparent 50%, @overlay 50%, @overlay 75%, transparent 75%, transparent); // Opera 11.10
+  background-image: linear-gradient(@deg, @overlay 25%, transparent 25%, transparent 50%, @overlay 50%, @overlay 75%, transparent 75%, transparent); // Standard, IE10
+  background-image: -ms-linear-gradient(@deg, @overlay 25%, transparent 25%, transparent 50%, @overlay 50%, @overlay 75%, transparent 75%, transparent);
+}
+
+.backgroundSize(@width, @height) {
+  background-size:            @width @height;
+  -webkit-background-size:    @width @height;
+  -moz-background-size:       @width @height;
+}
+
+@font-face {
+  font-family:      "OpenSans";
+  src:              url('../fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family:      "OpenSans";
+  src:              url('../fonts/OpenSans-Semibold.ttf');
+  font-weight:      bold;
+}
+
+@font-face {
+  font-family:      "OpenSans";
+  src:              url('../fonts/OpenSans-Light.ttf');
+  font-weight:      lighter;
+}
+
+@font-face {
+  font-family:      "OpenSans";
+  src:              url('../fonts/OpenSans-Italic.ttf');
+  font-style:       italic;
+}
+
+@font-face {
+  font-family:      "HelveticaNeue";
+  src:              url('../fonts/HelveticaNeue.dfont');
+}
+
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+@orange:                #f1852b;
+
+@bodyBg:                          #fff;
+
+@baseLineHeight:        20px;
+
+@linkColor:             #08c;
+@linkColorHover:        darken(@linkColor, 15%);
+
+//Error
+@errorDefaultBgColor:          #dd6e7b;
+@errorWarningBgColor:          #ffffed;
+@errorCriticalBgColor:         #dd6e7b;
+
+//Button
+@buttonBoxShadow:         inset 0 1px 1px rgba(255,255,255,0.6)
+                        , 0 -1px 1px -1px rgba(0,0,0,0.1);
+@buttonColorDanger:       rgb(218, 79, 73);
+@buttonColorDangerHover:  darken(@buttonColorDanger, 5%);
+@buttonBorderDanger:      1px solid darken(@buttonColorDanger, 5%);
+@buttonBoxShadowDanger:   inset 0 1px 1px lighten(@buttonColorDanger, 10%)
+                        , 0 -1px 1px -1px darken(@buttonColorDanger, 6%);
+
+@zindexDropdown:          1010;
+@zindexPopover:           1000;
+@zindexTooltip:           1030;
+@zindexFixedNavbar:       1030;
+@zindexModalBackdrop:     1040;
+@zindexModal:             1050;
+
+@tooltipColor:            #fff;
+@tooltipBackground:       #000;
+@tooltipArrowWidth:       5px;
+@tooltipArrowColor:       @tooltipBackground;
+
+@popoverBackground:       #fff;
+@popoverArrowWidth:       10px;
+@popoverArrowColor:       #fff;
+@popoverTitleBackground:  darken(@popoverBackground, 3%);
+
+@popoverArrowOuterWidth:  @popoverArrowWidth + 1;
+@popoverArrowOuterColor:  rgba(0,0,0,.25);
+
+//Dropdown
+@dropdownBackground:            @white;
+@dropdownBorder:                rgba(0,0,0,.2);
+@dropdownDividerTop:            #e5e5e5;
+@dropdownDividerBottom:         @white;
+
+@dropdownLinkColor:             @grayDark;
+
+@dropdownLinkColorHover:        @white;
+@dropdownLinkBackgroundHover:   @dropdownLinkBackgroundActive;
+
+@dropdownLinkColorActive:       @dropdownLinkColor;
+@dropdownLinkBackgroundActive:  @linkColor;
+
+//Icons
+@calendarIcon:                    url('../../images/icons/calendar_64.png');
+@attachmentIcon:                  url('../../images/icons/attach_64.png');
+@commentsIcon:                    url('../../images/icons/comment_64.png');
+@tagIcon:                         url('../../images/icons/tag_64.png');
+@personIcon:                      url('../../images/icons/man_64.png');
+@infoIcon:                        url('../../images/icons/info_64.png');
+@caseIcon:                        url('../../images/icons/case_64.png');
+@spannerIcon:                     url('../../images/icons/spanner_64.png');
+@deleteIcon:                      url('../../images/icons/delete_64.png');
+@gearIcon:                        url('../../images/icons/gear_64.png');
+
+@navBarBgColor:                   darken(#333, 4%);
+@navBarBoxShadow:                 0 1px 5px 3px rgba(0,0,0,0.2)
+                                , inset 0 1px 1px rgba(255,255,255,0.2);
+@navBarBorder:                    1px solid darken(@navBarBgColor, 5%);
+@navBarNotifyCountBgColor:        #dd6e7b;
+
+//Global Nav
+@globalNavBgColor:                #f5f6f9;
+@globalNavBg:                     url('../../images/bg_333_noise.png');
+@globalNavBorder:                 1px solid darken(@globalNavBgColor, 5%);
+
+//Local Nav
+@localNavBgColor:                 #f5f6f9;
+@localNavHeaderBgColor:           @navBarBgColor;
+@localNavHeaderBorder:            1px solid darken(@localNavHeaderBgColor, 5%);
+@localNavHeaderButtonBorder:      1px solid darken(@localNavHeaderBgColor, 3%);
+@localNavHeaderButtonShadow:      inset 0 1px rgba(255,255,255,0.2)
+                                , 0 -1px 2px rgba(0,0,0,0.2);
+@localNavHeaderButtonShadowAct:   inset 0 1px rgba(0,0,0,0.2)
+                                , 0 -1px 2px rgba(0,0,0,0.2);
+@localNavShadow:                  0 1px 5px 3px rgba(0,0,0,0.2)
+                                , inset 0 1px 1px rgba(255,255,255,0.2);
+@localNavHoverBgColor:            #52a5d4;
+@localNavHoverBorder:             1px solid darken(@localNavHoverBgColor, 4%);
+@localNavHoverShadow:             inset 0 1px rgba(255,255,255,0.4);
+
+//Modal
+@modalOptionsBarBgColor:          @taskOptionsBarBgColor;
+@modalOptionsBarBorder:           1px solid darken(@modalOptionsBarBgColor, 5%);
+@modalOptionsBarBoxShadow:        inset 0 1px 1px rgba(255,255,255,0.8);
+@modalOptionsBarBoxShadowActive:  inset 0 1px 1px rgba(0,0,0,0.2);
+@modalOptionsInputBgColor:        #f5f5f5;
+
+//Project
+@projectHeaderBarBoxShadow:       0 1px 5px 1px rgba(0,0,0,0.2);
+@projectHeaderBgColor:            #e0e3ed;
+@projectHeaderBoxShadow:          inset -1px 0 1px rgba(255,255,255,0.4);
+@projectBorderColor:              #c6d1db;
+@projectBorder:                   1px solid @projectBorderColor;
+@projectTasksBoxShadow:           1px 0 1px 1px rgba(0,0,0,0.1);
+
+//Task
+@taskBgColor:                     @white;
+@taskBgColorHover:                @taskOptionsBarBgColor;
+@taskBoxShadow:                   inset 0 1px 1px rgba(255,255,255,0.8);
+@taskButtonBorderHover:           1px solid darken(@taskBgColor, 10%);
+@taskButtonShadowHover:           0 1px 2px -1px rgba(0,0,0,0.2);
+@taskBorderColor:                 #ecf2f6;
+@taskBorder:                      1px solid @taskBorderColor;
+@taskOptionsBarBgColor:           #f5f6f9;
+@taskOptionsBoxShadow:            inset 0 1px 1px rgba(255,255,255,0.8);
+@taskOptionsBarHeight:            30px;
+@taskOptionsBarBgColorHover:      darken(@taskOptionsBarBgColor, 5%);
+@taskOptionsBarBgColorActive:     darken(@taskOptionsBarBgColor, 5%);
+@taskOptionsBarBoxShadowActive:   inset 0 1px 2px rgba(0,0,0,0.2);
+@taskCompleteColor:               #cdcfd6;
+
+//Info
+@infoItemHeaderBarBgColor:        darken(@projectHeaderBgColor, 15%);
+@infoItemHeaderBarBgColorActive:  @localNavHoverBgColor;
+@infoItemHeaderBgColor:           #eff2f6;
+@infoItemTextColor:               @taskOptionsBarBgColor;
+@infoItemTextColorActive:         #666;
+@infoContentTextColor:            #999;
+@infoContentTextColorActive:      #666;
+@infoContentBorderHover:          1px solid @infoItemHeaderBarBgColor;
+@infoItemBgColor:                 #b0c1d6;
+@infoItemBgColorHover:            @infoItemBgColor;
+@infoItemBgColorActive:           #a58bd5;
+@infoContentBtnBgColor:           @taskOptionsBarBgColor;
+@infoContentBtnBgColorHover:      darken(@taskOptionsBarBgColor, 2%);
+@infoContentBtnBoxShadow:         inset 0 1px 1px rgba(255,255,255,0.8)
+                                , inset 0 -1px 1px rgba(149,150,153,0.1);
+@infoContentBtnBoxShadowActive:   inset 0 1px 1px rgba(0,0,0,0.2)
+                                , inset 0 -1px 1px rgba(149,150,153,0.1);
+
+html, body {
+  height:               100%;
+  margin:               0;
+  padding:              0;
+  overflow:             hidden;
+}
+
+body {
+  font-family:          "HelveticaNeue", "Helvetica", "Arial";
+  background:           @bodyBg;
+  font-size:            10pt;
+}
+
+a:link {
+  text-decoration:      none;
+  color:                @black;
+}
+
+a:visited {
+  color:                @black;
+}
+
+a:hover {
+  color:                @black;
+}
+
+a:active {
+  color:                @black;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline:              none;
+}
+
+form[name="fileUpload"] {
+  display:              none;
+}
+
+input[type="file"] {
+  display:              none;
+}
+
+ul {
+  list-style:           none;
+  margin:               0;
+  padding:              0;
+}
+
+.hide,
+.hide * {
+  display:              none;
+}
+
+[class^="icon-"],
+[class*="icon-"] {
+  display:              inline-block;
+  background-size:      15px 15px;
+  height:               15px;
+  width:                15px;
+  line-height:          15px;
+  background-repeat:    no-repeat;
+}
+
+.icon-calendar {
+  background-image:     @calendarIcon;
+}
+
+.icon-person {
+  background-image:     @personIcon;
+}
+
+.icon-tag {
+  background-image:     @tagIcon;
+}
+
+.icon-comments {
+  background-image:     @commentsIcon;
+}
+
+.icon-attachment {
+  background-image:     @attachmentIcon;
+}
+
+.icon-info {
+  background-image:     @infoIcon;
+}
+
+.icon-case {
+  background-image:     @caseIcon;
+}
+
+.icon-spanner {
+  background-image:     @spannerIcon;
+}
+
+.icon-delete {
+  background-image:     @deleteIcon;
+}
+
+.icon-gear {
+  background-image:     @gearIcon;
+}
+
+button {
+  margin:               0;
+  height:               30px;
+  //padding:              0 10px;
+  border-radius:        3px;
+  .box-shadow(@buttonBoxShadow);
+  border:               1px solid #ddd;
+  background-color:     @white;
+}
+
+.btn {
+  &[class^="btn-"],
+  &[class*="btn-"] {
+    .box-shadow(@buttonBoxShadow);
+    text-shadow:          0 -1px 0 rgba(0,0,0,0.4);
+  }
+  &.btn-danger {
+    background-color:     @buttonColorDanger;
+    color:                @white;
+    border:               @buttonBorderDanger;
+    .box-shadow(@buttonBoxShadowDanger);
+    &:hover {
+      background-color:     @buttonColorDangerHover;
+    }
+  }
+}
+
+.container {
+  width:                100%;
+  height:               100%;
+  display:              -webkit-box;
+  -webkit-box-orient:   horizontal;
+}
+
+.errorMessage {
+  padding:              10px;
+  margin:               5px 0;
+  font-weight:          bold;
+  background-color:     @errorDefaultBgColor;
+  border:               1px solid #ddd;
+  border-radius:        3px;
+  &.warning {
+    background-color:     @errorWarningBgColor;
+    border:               1px solid #ddd;
+  }
+  &.critical {
+    border:               1px solid #ddd;
+    background-color:     @errorCriticalBgColor;
+  }
+}
+
+div.modal {
+  height:               auto;
+  display:              none;
+  .modal-header {
+    border-bottom:        1px solid #ddd;
+  }
+  .modal-body {
+    max-height:           400px;
+  }
+  .modalOptionsBar {
+    border-bottom:        1px solid #ddd;
+    background-color:     @modalOptionsBarBgColor;
+    .box-shadow(@modalOptionsBarBoxShadow);
+    ul.nav {
+      padding:              0 15px;
+      li {
+        float:                left;
+        padding:              3px 10px;
+        margin:               0;
+        border-left:          @modalOptionsBarBorder;
+        color:                darken(@modalOptionsBarBgColor, 20%);
+        &:last-child {
+          border-right:         @modalOptionsBarBorder;
+        }
+        &:hover {
+          .box-shadow(@modalOptionsBarBoxShadow);
+          background-color:     darken(@modalOptionsBarBgColor, 2%);
+          color:                #333;
+        }
+        &.active {
+          .box-shadow(@modalOptionsBarBoxShadowActive);
+          background-color:     darken(@modalOptionsBarBgColor, 5%);
+          color:                #333;
+        }
+      }
+    }
+  }
+  .tab-content {
+    overflow:             auto;
+    .tab-pane {
+      display:              none;
+    }
+    .active {
+      display:              block;
+    }
+  }
+  &[data-wid], &[data-pid], &[data-uid] {
+    .modal-header {
+      input[type="text"] {
+        font-size:            14pt;
+        height:               28pt;
+        outline:              none;
+        border:               1px solid transparent;
+        border-radius:        3px;
+        box-sizing:           border-box;
+        padding:              3px;
+        width:                100%;
+        &:hover, &:focus {
+          border:               1px solid #ddd;
+        }
+      }
+    }
+    .modal-body {
+      .usersInfo, .usersList, .pending, .userInvite, .errorMessage {
+        margin-bottom:        10px;
+      }
+      .usersList {
+        .users {
+          .user {
+            padding:                5px 0px;
+            border-radius:          3px;
+            &:hover {
+              background-color:     @modalOptionsInputBgColor;
+            }
+            div {
+              display:              inline-block;
+              vertical-align:       top;
+            }
+            .fullName {
+              width:                300px;
+            }
+            .email {
+              width:                200px;
+            }
+            .delete {
+              .icon-delete {
+                cursor:               pointer;
+              }
+            }
+          }
+        }
+      }
+      .invite {
+        ul > li {
+          display:              inline-block;
+          &.to {
+            width:              300px;
+          }
+          &.created_date {
+            width:              200px;
+            overflow:             hidden;
+            white-space:          nowrap;
+            text-overflow:        ellipsis;
+          }
+        }
+      }
+      .userInvite {
+        input[type="text"] {
+          border-radius:        3px;
+          box-shadow:           none;
+          border:               1px solid #ddd;
+          padding:              0 5px;
+          height:               30px;
+          background-color:     @modalOptionsInputBgColor;
+          &:focus {
+            background-color:     @white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.auth {
+  -webkit-box-flex:     1;
+}
+
+section.globalNav {
+  width:                220px;
+  height:               100%;
+  background:           @globalNavBgColor;
+  color:                @white;
+  //border-right:         @globalNavBorder;
+}
+
+section.globalNav header.localNavHeader {
+  height:               36px;
+  width:                100%;
+  display:              -webkit-box;
+  -webkit-box-orient:   horizontal;
+  border-bottom:        @localNavHeaderBorder;
+  box-shadow:           @localNavShadow;
+  background:           @localNavHeaderBgColor;
+}
+
+section.globalNav header.localNavHeader div {
+  height:               100%;
+}
+
+section.globalNav header.localNavHeader .btn {
+  background:           @localNavHeaderBgColor;
+  border:               @localNavHeaderButtonBorder;
+  -webkit-box-shadow:   @localNavHeaderButtonShadow;
+  border-radius:        5px;
+  color:                @white;
+  cursor:               pointer;
+  &:active {
+    -webkit-box-shadow:   @localNavHeaderButtonShadowAct;
+  }
+}
+
+section.globalNav header.localNavHeader .previous {
+  width:                30px;
+  line-height:          35px;
+  text-align:           center;
+}
+
+section.globalNav header.localNavHeader .current {
+  -webkit-box-flex:     1;
+  line-height:          35px;
+  text-align:           center;
+  overflow:             hidden;
+  white-space:          nowrap;
+  text-overflow:        ellipsis;
+}
+
+section.globalNav header.localNavHeader .currentOptions {
+  width:                30px;
+}
+
+section.globalNav section.localNav {
+  color:                @grayDark;
+  margin-top:           10px;
+}
+
+section.globalNav section.localNav ul.nav {
+  list-style:           none;
+  margin:               0;
+  padding:              0;
+}
+
+section.globalNav section.localNav ul.nav li.navItem {
+  padding:              5px 10px;
+  border:               1px solid transparent;
+  height:               20px;
+  margin-bottom:        5px;
+  &:hover, &.active {
+    background:           @localNavHoverBgColor;
+    border-top:           @localNavHoverBorder;
+    border-bottom:        @localNavHoverBorder;
+    -webkit-box-shadow:   @localNavHoverShadow;
+    cursor:               pointer;
+    color:                @white;
+  }
+  &:hover .options {
+    display:              block;
+  }
+  .title {
+    max-width:            150px;
+    height:               20px;
+    vertical-align:       middle;
+  }
+  .options {
+    float:                right;
+    clear:                right;
+    display:              none;
+    padding:              1px;
+    border:               1px solid transparent;
+    &:hover {
+      border:             @taskBorder;
+      border-radius:      3px;
+    }
+  }
+}
+
+section.appWindow {
+  //height:               100%;
+  display:              -webkit-box;
+  -webkit-box-orient:   vertical;
+  -webkit-box-flex:     1;
+  background-color:     #eee;
+  > div.ember-view {
+    -webkit-box-flex:     1;
+    display:              -webkit-box;
+    -webkit-box-orient:   vertical;
+  }
+}
+
+section.appWindow header.navBar {
+  height:               30px;
+  padding:              3px 15px;
+  //width:                100%;
+  //position:             absolute;
+  display:              -webkit-box;
+  -webkit-box-orient:   horizontal;
+  border-bottom:        @navBarBorder;
+  box-shadow:           @navBarBoxShadow;
+  background:           @navBarBgColor;
+  .appNav {
+    -webkit-box-flex:     1;
+  }
+  .userNav {
+    color:              @grayLight;
+  }
+  > ul {
+    height:             100%;
+    > li {
+      float:              left;
+      height:             100%;
+      margin-right:       10px;
+      //border-radius:      3px;
+      border:             1px solid transparent;
+      &:hover {
+        //border:             1px solid lighten(@navBarBgColor, 5%);
+        background-color:   lighten(@navBarBgColor, 10%);
+      }
+      &:last-child {
+        margin-right:       0;
+      }
+      &.open {
+        background-color:   lighten(@navBarBgColor, 10%);
+      }
+      * {
+        //height:             100%;
+        vertical-align:     top;
+      }
+      .notifyCount {
+        border-radius:      3px;
+        padding:            2px;
+        margin-left:        2px;
+        &.unread {
+          background-color:   @navBarNotifyCountBgColor;
+          color:              @white;
+        }
+      }
+    }
+  }
+  .dropdown-menu {
+      border-radius:      0;
+  }
+  .invitations {
+    .dropdown-menu {
+      width:            360px;
+      .invite {
+        padding:              5px;
+        border-bottom:        1px solid #ddd;
+        &:last-child {
+          border-bottom:        1px solid transparent;
+        }
+        &:hover {
+          background-color:     @taskBgColorHover;
+        }
+        .inviteInfo {
+          padding:              5px;
+          //border-bottom:        1px solid #ddd;
+          .title {
+            color:                #333;
+          }
+          .type {
+
+          }
+        }
+        .inviteFrom {
+          padding:              5px;
+          display:              -webkit-box;
+          -webkit-box-orient:   horizontal;
+          .userPhoto {
+            width:                30px;
+            padding:              2px;
+          }
+          .info {
+            -webkit-box-flex:     1;
+          }
+          .actions {
+            button {
+              margin-right:         5px;
+              &:last-child {
+                margin-right:         0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.userNav .authUser .user .userPic {
+  width:                30px;
+}
+
+.userNav .authUser .user,
+.userNav .authUser .options,
+.userNav .authUser .user .userPic,
+.userNav .authUser .user .fullName {
+  display:              inline-block;
+}
+
+/*section.userNav .invitations,
+section.userNav .authUser,
+section.userNav .authUser .user,
+section.userNav .authUser .options,
+section.userNav .authUser .user .userPic,
+section.userNav .authUser .user .fullName {
+  display:              inline-block;
+}*/
+
+.userNav .authUser .options .caret {
+  vertical-align:       top;
+}
+
+section.project {
+  //padding-top:          36px;
+  //height:               100%;
+  -webkit-box-flex:     1;
+  display:              -webkit-box;
+  -webkit-box-orient:  horizontal;
+  background-color:     #fff;
+}
+
+section.projectTasks {
+  -webkit-box-flex:     1;
+  //height:               100%;
+  border-left:          @projectBorder;
+  border-right:         @projectBorder;
+  display:              -webkit-box;
+  -webkit-box-orient:   vertical;
+}
+
+section.project header.projectHeader {
+  background-color:     @projectHeaderBgColor;
+  .box-shadow(@projectHeaderBoxShadow);
+}
+
+header.projectHeader > .bar,
+section.infoView > .bar {
+  height:               20px;
+  background-color:     @taskOptionsBarBgColor;
+  border-bottom:        @projectBorder;
+}
+
+section.project header.projectHeader section.projectInfo {
+  padding:              10px;
+  display:              -webkit-box;
+  -webkit-box-orient:   horizontal;
+}
+
+header.projectHeader .projectTitle {
+  -webkit-box-flex:     1;
+}
+
+header.projectHeader .projectTitle input[type="text"] {
+  font-size:            20pt;
+  height:               32pt;
+  padding:              3px;
+  border:               1px solid transparent;
+  background-color:     transparent;
+  width:                100%;
+  box-sizing:           border-box;
+}
+
+header.projectHeader .projectStatus {
+  height:               20pt;
+  padding:              3px;
+}
+
+.projectStatus select {
+  vertical-align:       middle;
+}
+
+section.project section.info {
+  width:                  400px;
+  //background-color:       @projectHeaderBgColor;
+  display:                -webkit-box;
+  -webkit-box-orient:     vertical;
+  > .ember-view {
+    -webkit-box-flex:       1;
+    display:                -webkit-box;
+    -webkit-box-orient:     vertical;
+  }
+}
+
+section.projectTasks > div.ember-view {
+  -webkit-box-flex:     1;
+  display:              -webkit-box;
+  -webkit-box-orient:   vertical;
+}
+
+section.projectTasks section.tasks {
+  -webkit-box-flex:     1;
+  display:              -webkit-box;
+  -webkit-box-orient:   vertical;
+}
+
+section.projectTasks .taskOptions {
+  background-color:     @taskOptionsBarBgColor;
+  border-top:           @projectBorder;
+  border-bottom:        @projectBorder;
+  .box-shadow(@taskOptionsBoxShadow);
+  .dropdown {
+    float:                right;
+    .btn {
+      height:               @taskOptionsBarHeight;
+      border-top:           none;
+      border-right:         none;
+      border-bottom:        none;
+      border-left:          1px solid @projectBorder;
+      border-radius:        0;
+      background-color:     @taskOptionsBarBgColor;
+      &:hover, &:active {
+        background-color:     @taskOptionsBarBgColorHover;
+      }
+      &:active {
+        .box-shadow(@taskOptionsBarBoxShadowActive);
+      }
+    }
+  }
+}
+
+section.tasks .tasksList {
+  -webkit-box-flex:       1;
+  overflow-y:             scroll;
+  padding-bottom:         80px;
+}
+
+section.tasks .task .tags {
+  margin:                 0;
+  padding:                0 5px;
+  white-space:            nowrap;
+  overflow:               hidden;
+  text-overflow:          ellipsis;
+  max-width:              100px;
+}
+
+section.tasks .task .tags .tag {
+  margin-left:            5px;
+  text-overflow:          ellipsis;
+}
+
+section.tasks .task .due {
+  max-width:              100px;
+  padding:                0 5px;
+}
+
+section.tasks .task .taskInfo {
+  padding:                0 5px;
+}
+
+section.task {
+  display:                -webkit-box;
+  -webkit-box-orient:     horizontal;
+  height:                 45px;
+  border-bottom:          @taskBorder;
+  & * {
+    color:                  @gray;
+  }
+  .box-shadow(@taskBoxShadow);
+  &:hover, &.selected {
+    background-color:       @taskBgColorHover;
+    & * {
+      color:                  @black;
+    }
+  }
+  &.complete {
+    .gradientDirectional(@taskBgColorHover, rgba(92,111,141,0.1), -45deg);
+    .backgroundSize(8px, 8px);
+    &:hover {
+      background-image:       none;
+    }
+    & * {
+      color:                  @taskCompleteColor;
+    }
+  }
+  .editable-click {
+    border-bottom:          none;
+  }
+}
+
+section.task div, section.task ul li {
+  line-height:              45px;
+}
+
+section.task .btn {
+  border:                 1px solid transparent;
+  background-color:       transparent;
+  border-radius:          3px;
+  vertical-align:         middle;
+  box-shadow:             none;
+}
+
+section.task .taskNum {
+  width:                  30px;
+  padding-right:          5px;
+  padding-left:           10px;
+  text-align:             left;
+  border-bottom:          #f5f5f5;
+}
+
+/*
+section.task.parentTask .marker {
+  //background:             #333;
+}
+
+section.task.subTask .marker {
+  background:             #666;
+}
+
+section.task .marker {
+  width:                  5px;
+  background:             #f5f5f5;
+}
+*/
+
+section.task .markedComplete {
+  width:                  30px;
+  text-align:             center;
+}
+
+section.task .markedComplete input[type="checkbox"] {
+  width:                  auto;
+  cursor:                 pointer;
+}
+
+section.task .assignee {
+  width:                  30px;
+  padding:                0 10px;
+  text-align:             center;
+  input[type="text"] {
+    &:focus {
+      border:                 @projectBorder;
+      border-radius:          3px;
+    }
+  }
+}
+
+section.task .title {
+  -webkit-box-flex:       1;
+}
+
+section.task input[type="text"] {
+  width:                  100%;
+  height:                 40px;
+  margin:                 0;
+  padding:                0 5px;
+  box-sizing:             border-box;
+  border:                 1px solid transparent;
+  background-color:       transparent;
+  &:hover {
+    border:                 @projectBorder;
+    border-radius:          3px;
+  }
+}
+
+section.infoView {
+  -webkit-box-flex:       1;
+  display:                -webkit-box;
+  -webkit-box-orient:     vertical;
+}
+
+section.infoView header.infoHeader{
+  width:                  100%;
+  display:                -webkit-box;
+  -webkit-box-orient:     horizontal;
+}
+
+header.infoHeader section.infoDetails,
+header.infoHeader section.activity {
+  -webkit-box-flex:       1;
+}
+
+header.infoHeader header.bar {
+  height:                 5px;
+  background-color:       @infoItemHeaderBarBgColor;
+}
+
+header.infoHeader section.content {
+  padding:                10px 15px;
+  background-color:       @taskOptionsBarBgColor;
+  .box-shadow(@taskOptionsBoxShadow);
+  border:                 1px solid transparent;
+  border-bottom:          @projectBorder;
+  color:                  @infoItemHeaderBarBgColor;
+}
+
+header.infoHeader section.activity section.content {
+  border-left:            @projectBorder;
+}
+
+section.activity section.content .title,
+section.activity section.content .activityCount {
+  display:                inline-block;
+}
+
+section.activity section.content .activityCount {
+  float:                  right;
+  clear:                  right;
+  background-color:       @infoItemHeaderBarBgColor;
+  width:                  15px;
+  height:                 15px;
+  text-align:             center;
+  border-radius:          3px;
+  color:                  @taskOptionsBarBgColor;
+}
+
+section.activity .activityCount .count {
+}
+
+header.infoHeader .active {
+  header.bar {
+    background-color:         @infoItemHeaderBarBgColorActive;
+    border-right:             1px solid @infoItemHeaderBarBgColorActive;
+  }
+  section.content {
+    background-color:         @white;
+    border:                   1px solid transparent;
+    border-bottom:            none;
+    color:                    @infoItemTextColorActive;
+    .activityCount {
+      background-color:         @infoItemHeaderBarBgColorActive;
+      color:                    @white;
+    }
+  }
+}
+
+section.infoView {
+  a:link {
+    color:              @infoItemBgColor
+  }
+  a:visited {
+    color:              @infoItemBgColor
+  }
+  a:hover {
+    color:              @black;
+  }
+  a:active {
+    color:              @black;
+  }
+}
+
+section.infoView section.infoContent {
+  -webkit-box-flex:           1;
+  color:                      @infoContentTextColor;
+  overflow-y:                 scroll;
+  padding-top:                10px;
+  padding-left:               10px;
+  padding-right:              10px;
+  padding-bottom:             40px;
+}
+
+section.infoContent .details {
+  :first-child {
+    padding-top:                0;
+  }
+  > * {
+    padding-top:                15px;
+  }
+}
+
+section.infoContent input,
+section.infoContent textarea {
+  color:                      @infoContentTextColor;
+  border:                     1px solid transparent;
+  border-radius:              3px;
+  outline:                    none;
+  &:hover {
+    color:                      @infoContentTextColorActive;
+    border:                     @infoContentBorderHover;
+  }
+}
+
+section.infoContent button {
+  background-color:           @infoContentBtnBgColor;
+  .box-shadow(@infoContentBtnBoxShadow);
+  padding-bottom:             0;
+  &:hover, &:active {
+    background-color:           @infoContentBtnBgColorHover;
+  }
+  &:active {
+    .box-shadow(@infoContentBtnBoxShadowActive);
+  }
+}
+
+section.infoContent .status,
+section.infoContent .dates,
+section.infoContent .title,
+section.infoContent .description,
+section.infoContent .notes,
+section.infoContent .assignee,
+section.infoContent .priority,
+section.infoContent .attachments,
+section.infoContent .members {
+  &:hover {
+    color:                      @infoContentTextColorActive;
+  }
+}
+
+section.infoContent .status,
+section.infoContent .dates,
+section.infoContent .attachments,
+section.infoContent .assignee,
+section.infoContent .priority,
+section.infoContent .members {
+  display:                    -webkit-box;
+  -webkit-box-orient:         horizontal;
+  .itemTitle {
+    width:                      100px;
+    padding-left:               5px;
+  }
+  .item {
+    -webkit-box-flex:           1;
+    .date {
+      margin-right:               5px;
+      &.active {
+        color:                      @infoItemBgColorActive;
+        font-weight:                bold;
+      }
+      &:hover {
+        color:                      @infoItemBgColorHover;
+      }
+      &:last-child {
+        margin-right:               0;
+      }
+    }
+  }
+  ul.item {
+    li {
+      display:                    inline-block;
+    }
+  }
+}
+
+section.infoContent .status {
+  select {
+    box-sizing:                 border-box;
+    width:                      100%;
+  }
+  .dropdown {
+    float:                      right;
+  }
+}
+
+section.infoContent .title {
+  input[type="text"] {
+    height:                     40px;
+    font-size:                  20pt;
+    padding:                    3px;
+    width:                      100%;
+    box-sizing:                 border-box;
+    white-space:                nowrap;
+    overflow:                   hidden;
+    text-overflow:              ellipsis;
+  }
+}
+
+section.infoContent .description,
+section.infoContent .notes {
+  textarea {
+    padding:                    3px;
+    width:                      100%;
+    height:                     200px;
+    box-sizing:                 border-box;
+    resize:                     none;
+    overflow-y:                 scroll;
+  }
+}
+
+section.infoContent [type="button"] {
+  cursor:                     pointer;
+}
+
+section.infoContent .label {
+  padding:                      3px 5px;
+  background:                   @infoItemBgColor;
+  color:                        lighten(@infoItemBgColor, 20%);
+  border-radius:                3px;
+  margin-bottom:                5px;
+  .filename,
+  .name {
+    padding-right:                5px;
+    cursor:                       pointer;
+    &:hover {
+      color:                        @white;
+    }
+  }
+  .remove {
+    padding-left:                 5px;
+    border-left:                  1px solid darken(@infoItemBgColor, 5%);
+    cursor:                       pointer;
+    &:hover {
+      color:                        @white;
+    }
+  }
+  a:link {
+    color:              lighten(@infoItemBgColor, 15%);
+  }
+  a:visited {
+    color:              lighten(@infoItemBgColor, 15%);
+  }
+  a:hover {
+    color:              @white;
+  }
+  a:active {
+    color:              @white;
+  }
+}

@@ -1,0 +1,77 @@
+<div class="modal-header">
+  {{view view.title}}
+</div>
+<div class="modalOptionsBar">
+  <div class="clearfix"></div>
+  <ul class="nav nav-tabs">
+    <li class="active"
+    data-target="#workspaceOptionsHome"
+    {{action showTab target="view"}}>
+      Info
+    </li>
+    <li
+    data-target="#workspaceOptionsUsers"
+    {{action showTab target="view"}}>
+      Members
+    </li>
+  </ul>
+  <div class="clearfix"></div>
+</div>
+<div class="tab-content">
+  <div class="tab-pane active" id="workspaceOptionsHome">
+    <div class="modal-body">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mauris tempus turpis tincidunt pharetra ac vel turpis. Etiam vel nibh elit. Integer non orci non ligula vestibulum mollis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla consectetur elementum aliquet. Morbi non nisi nisl, vel tempor sapien. In eget pharetra massa. Aenean magna nibh, suscipit non lobortis quis, cursus eget enim. Nullam lobortis feugiat arcu, vel volutpat quam blandit a.
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in sem risus. Nam in velit risus, ac malesuada tellus. In hac habitasse platea dictumst. Aliquam erat volutpat. Donec rutrum vehicula metus, at pulvinar risus lacinia sagittis. Morbi consequat euismod odio et blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce pharetra rutrum metus, sit amet tristique nulla varius vitae.
+    </div>
+    <div class="modal-footer">
+      <button class="btn" type="button" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  </div>
+  <div class="tab-pane" id="workspaceOptionsUsers">
+    <div class="modal-body">
+      <section class="usersInfo">
+        {{App.selectedWorkspaceController.userCount}}
+      </section>
+      <section class="usersList">
+        <section class="users">
+          <ul>
+            {{#each view.users}}
+            {{#view App.UserView}}
+            <li class="user">
+              <div class="fullName">{{view.fullName}}</div>
+              <div class="email">{{view.email}}</div>
+              <div class="remove">
+                <i class="icon-delete" {{action removeUser target="view"}}></i>
+              </div>
+            </li>
+            {{/view}}
+            {{/each}}
+          </ul>
+        </section>
+        {{#if App.selectedWorkspaceController.hasInvites}}
+        <section class="pending">
+          <h3>Pending</h3>
+          {{#each App.selectedWorkspaceController.invitations}}
+          {{view App.ModalInviteView}}
+          {{/each}}
+        </section>
+        {{/if}}
+      </section>
+      <section class="userInvite">
+        {{#if App.selectedWorkspaceController.hasError}}
+        <div class="errorMessage warning">
+          {{App.selectedWorkspaceController.errorMessage}}
+        </div>
+        {{/if}}
+        {{view view.inviteInputText placeholder="email@example.com"}}
+        <button
+        {{bindAttr disabled="view.invalidEmail" class=":btn"}}
+        {{action prepInvite target="controller"}}>Send Invite</button>
+      </section>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" type="button" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="clearfix"></div>
+<ul class="appNav">
+</ul>
+<ul class="userNav">
+  <li class="invitations dropdown">
+    <div class="dropdown-toggle" data-toggle="dropdown">
+      <i class="icon-case"></i><span {{bindAttr class=":notifyCount App.router.invitationsController.hasUnreadReceived:unread"}}>{{App.router.invitationsController.myInvitationCount}}</span>
+    </div>
+    <ul class="dropdown-menu pull-right" role="menu">
+      {{#each App.router.invitationsController.invitationsToMe}}
+      {{#view App.NavBarInviteView}}
+      <li class="invite">
+        <section class="inviteInfo">
+          <span class="title">{{this.context_title}}</span>
+          <span class="type">
+            {{#if this.workspace_id_fk}}
+            Workspace
+            {{/if}}
+            {{#if this.project_id_fk}}
+            Project
+            {{/if}}
+          </span>
+        </section>
+        <section class="inviteFrom">
+          <section class="userPhoto">
+          </section>
+          <section class="info">
+            <div class="fullName">
+              {{view.fullName}}
+            </div>
+            <div class="email">
+              {{this.from_email}}
+            </div>
+          </section>
+          <section class="actions">
+            <button class="btn" type="button" {{action acceptInvite target="view"}}>Accept</button><button class="btn" type="button" {{action declineInvite target="view"}}>Decline</button>
+          </section>
+        </section>
+      </li>
+      {{/view}}
+      {{/each}}
+    </ul>
+  </li>
+  <li class="authUser dropdown">
+    <div class="user dropdown-toggle" data-toggle="dropdown">
+      <div class="userPic">
+      </div>
+      <div class="fullName">
+      {{#if App.authController.fullName}}
+        {{App.authController.fullName}}
+      {{else}}
+        {{App.authController.authUser.email}}
+      {{/if}}
+      </div>
+    </div>
+    <div class="options dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </div>
+    <ul class="dropdown-menu pull-right" role="menu">
+      <li {{action loadProfile target="view"}}><a href="#">Profile</a></li>
+      <li {{action logout target="App.authController"}}><a href="#">Logout</a></li>
+    </ul>
+  </li>
+</ul>
+<div class="clearfix"></div>

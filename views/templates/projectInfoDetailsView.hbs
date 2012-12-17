@@ -1,0 +1,64 @@
+<section class="status">
+  <span class="projectStatus">
+    {{view view.projectStatus}}
+  </span>
+  <div class="item">
+    <div class="dropdown">
+      <button class="btn taskOptions dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-gear"></i>
+      </button>
+      <ul class="dropdown-menu pull-right" role="menu">
+        <li class="action">
+          <a href="#" data-toggle="modal" data-target="#confirmDelete"
+          {{action hideDropdown target="view"}}>
+            Delete
+          </a>
+        </li>
+      </ul>
+      <div id="confirmDelete" class="modal">
+        <div class="modal-header">
+          <h3>Confirmation</h3>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this project?
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger" data-dismiss="modal"
+          {{action deleteProject target="view"}}>Yes</button>
+        </div>
+      </div>
+  </div>
+</section>
+<section class="title">
+  {{view view.title}}
+</section>
+<section class="description">
+  {{view view.description placeholder="Description..."}}
+</section>
+<section class="dates">
+  <div class="itemTitle">Dates</div>
+  <div class="item"></div>
+</section>
+<section class="attachments">
+  <div class="itemTitle">
+    Files
+  </div>
+  <ul class="item">
+    {{#each App.router.projectController.files}}
+    {{view App.AttachmentView}}
+    {{/each}}
+    <li class="item attachment">
+      <a href="#" {{action uploadFile target="App.router.projectController"}}>Upload a File<i class="icon-attachment"></i></a>
+    </li>
+    <form name="fileUpload">
+      <input type="file" name="file">
+    </form>
+  </ul>
+</section>
+<section class="members">
+  <div class="itemTitle">Members</div>
+  <div class="item">
+    
+  </div>
+</section>

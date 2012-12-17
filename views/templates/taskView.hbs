@@ -1,0 +1,39 @@
+<div class="taskNum">{{view.taskIndex}}</div>
+<div class="marker"></div>
+<div class="markedComplete">
+  {{view view.completeCheckbox checkedBinding="complete"}}
+</div>
+<div class="assignee">
+{{#if this.assignee_fk}}
+  <span rel="tooltip" tooltipFor="task"
+  {{bindAttr data-original-title="view.fullName"}}>
+    {{view.initials}}
+  </span>
+{{else}}
+  <span rel="tooltip" tooltipFor="task" title="Assigned To">
+    <button type="button" class="btn"><i class="icon-person"></i></button>
+  </span>
+{{/if}}
+</div>
+<div class="title">
+  {{view view.taskTitle valueBinding="title"
+  placeholder="(new task)"}}
+</div>
+<!-- <div class="tags">
+  <button type="button" class="btn"><i class="icon-tag"></i></button>
+</div> -->
+<div class="due">
+  <span title="Due Date" rel="tooltip" tooltipFor="task">
+  {{#if this.due_date}}
+    {{this.stringDueDate}}
+  {{else}}
+    <button type="button" class="btn"><i class="icon-calendar"></i></button>
+  {{/if}}
+  </span>
+</div>
+<!-- <div class="comments">
+  <button type="button" class="btn"><i class="icon-comments"></i></button>
+</div> -->
+<div class="taskInfo">
+  <span rel="tooltip" tooltipFor="task" title="View Info"><button type="button" class="btn" {{action loadTask this}}><i class="icon-info"></i></button></span>
+</div>

@@ -1,0 +1,18 @@
+<section class="projectTasks">
+  <header class="projectHeader">
+    <section class="bar">
+    </section>
+    <section class="projectInfo">
+      <div class="projectStatus">
+        {{view view.projectStatus}}
+      </div>
+      <div class="projectTitle">
+        {{view view.projectTitle}}
+      </div>
+    </section>
+  </header>
+  {{outlet tasks}}
+</section>
+<section class="info">
+{{outlet info}}
+</section>

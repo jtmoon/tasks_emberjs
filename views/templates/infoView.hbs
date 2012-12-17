@@ -1,0 +1,27 @@
+<section class="bar"></section>
+<header class="infoHeader">
+  <section
+  {{bindAttr class=":infoDetails view.isDetails:active"}}
+  {{action loadDetails this}}
+  >
+    <header class="bar"></header>
+    <section class="content">
+      <span class="title">Details</span>
+    </section>
+  </section>
+  <section
+  {{bindAttr class=":activity view.isActivity:active"}}
+  {{action loadActivity this}}
+  >
+    <header class="bar"></header>
+    <section class="content">
+      <span class="title">Activity</span>
+      <span class="activityCount">
+        <div class="count">0</div>
+      </span>
+    </section>
+  </section>
+</header>
+<section class="infoContent">
+  {{outlet}}
+</section>

@@ -1,0 +1,14 @@
+{{#if App.authController.authUser}}
+<section class="globalNav">
+{{outlet nav}}
+</section>
+<section class="appWindow">
+  {{view App.NavBarView}}
+  {{outlet app}}
+</section>
+{{view App.WorkspaceOptionsModalView}}
+{{view App.UserProfileModalView}}
+{{view App.ProjectOptionsModalView}}
+{{else}}
+{{outlet}}
+{{/if}}

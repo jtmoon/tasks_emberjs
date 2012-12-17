@@ -1,0 +1,6 @@
+<ul class="nav">
+{{#each controller.content}}
+  <li class="navItem" {{action load this}}>{{this.title}}</li>
+{{/each}}
+</ul>
+<button class="btn" {{action new target="controller"}}>New</button>

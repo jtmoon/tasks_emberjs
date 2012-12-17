@@ -1,0 +1,59 @@
+<div class="login">
+  {{view Em.TextField
+    valueBinding="App.authController.email"
+    name="login_email"
+    placeholder="email@example.com"}}
+  {{view Em.TextField
+    valueBinding="App.authController.pw"
+    name="login_pw"
+    type="password"
+    placeholder="Password"}}
+  <button class="btn"
+  {{action attemptLogin target="App.authController"}}>
+    Login
+  </button>
+  <button class="btn" data-toggle="modal" data-target="#registerModal">
+    Sign-Up
+  </button>
+</div>
+<div id="registerModal" class="modal">
+  <div class="modal-header">
+    <h3>Register</h3>
+  </div>
+  <div class="modal-body">
+    <div class="err">
+    {{#if App.authController.hasError}}
+      {{App.authController.errorMessage}}
+    {{/if}}
+    </div>
+    <section class="form">
+      <div class="registerEmail">
+        {{view Em.TextField
+          valueBinding="App.authController.registerEmail"
+          name="login_email"
+          placeholder="email@example.com"}}
+      </div>
+      <div class="registerPw">
+        {{view Em.TextField
+          valueBinding="App.authController.registerPw"
+          name="login_pw"
+          type="password"
+          placeholder="Password"}}
+        {{view Em.TextField
+          valueBinding="App.authController.checkPw"
+          name="check_pw"
+          type="password"
+          placeholder="Re-enter Password"}}
+      </div>
+      <div class="betaCode">
+        {{view view.betaCodeInput placeholder="Beta Code"}}
+      </div>
+    </section>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button
+    {{action newUser target="App.authController"}}
+    {{bindAttr disabled="App.authController.notValid" class=":btn"}}>Sign-up</button>
+  </div>
+</div>

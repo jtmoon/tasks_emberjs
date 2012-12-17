@@ -1,0 +1,109 @@
+<section class="status">
+  <div class="itemTitle">
+    <span class="taskStatus">
+      {{view view.taskStatus}}
+    </span>
+  </div>
+  <div class="item">
+    <div class="dropdown">
+      <button class="btn taskOptions dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-gear"></i>
+      </button>
+      <ul class="dropdown-menu pull-right" role="menu">
+        <li class="action">
+          <a href="#"
+          {{action destroyTask target="view"}}>
+            Delete
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="title">
+  {{view view.title placeholder="(new task)"}}
+</section>
+<section class="assignee">
+  <div class="itemTitle">Assigned To</div>
+  {{#if App.selectedTaskController.selectedTask.assignee_fk}}
+  <div class="item">
+    {{view view.assigneeInput placeholder="Name..."}}
+    <span class="assignedTo label">
+      {{#view view.showAssignee}}
+      <span class="name" {{action selectAssignee target="view.parentView"}}>{{#if App.router.taskController.fullName}}{{App.router.taskController.fullName}}{{else}}{{App.selectedTaskController.selectedTask.assignee_email}}{{/if}}</span><span class="remove" {{action removeAssignee target="view.parentView"}}>&times;</span>
+      {{/view}}
+    </span>
+  </div>
+  {{else}}
+  <div class="item">
+    {{view view.assigneeInput placeholder="Name..."}}
+    <span class="btn" rel="tooltip" tooltipFor="taskInfo" title="Assign to someone."
+    {{action selectAssignee target="view"}}>
+      <i class="icon-person"></i>
+    </span>
+  </div>
+  {{/if}}
+</section>
+<section class="priority">
+  <div class="itemTitle"></div>
+  <span rel="tooltip" tooltipFor="taskInfo" title="Mark as Today, Upcoming, or Later to help plan your work.">
+  <div class="item">
+    <span
+    {{bindAttr class=":item :date controller.priorityToday:active"}}
+    {{action setDueToday target="controller"}}>Today</span>
+    <span
+    {{bindAttr class=":item :date controller.priorityUpcoming:active"}}
+    {{action setUpcoming target="controller"}}>Upcoming</span>
+    <span
+    {{bindAttr class=":item :date controller.priorityLater:active"}}
+    {{action setDueLater target="controller"}}>Later</span>
+  </div>
+  </span>
+</section>
+<section class="dates">
+  <div class="itemTitle">Due Date</div>
+  <div class="item">
+    {{view view.datepickerInput placeholder="mm/dd/yyyy"}}
+    {{#if App.selectedTaskController.selectedTask.due_date}}
+    <span class="label">
+      {{#view view.showDueDate}}
+      <span class="dueDate" {{action setDueDate target="view.parentView"}}>{{this.controller.task.stringDueDate}}</span><span class="remove" {{action removeDueDate target="view.parentView"}}>&times;</span>
+      {{/view}}
+    </span>
+    {{else}}
+    <span rel="tooltip" tooltipFor="taskInfo"
+    title="Set a concrete due date."
+    {{bindAttr class=":btn view.isHiddenDueDate::hide"}}
+    {{action setDueDate target="view"}}>
+      <i class="icon-calendar"></i>
+    </span>
+    {{/if}}
+  </div>
+</section>
+<section class="notes">
+  {{view view.notes placeholder="Notes..."}}
+</section>
+<section class="attachments">
+  <div class="itemTitle">
+    Files
+  </div>
+  <ul class="item">
+    {{#each App.router.taskController.files}}
+    {{view App.AttachmentView}}
+    {{/each}}
+    <li class="item attachment">
+      <a href="#" {{action uploadFile target="App.router.taskController"}}>Upload a File</a>
+    </li>
+    <form name="fileUpload">
+      <input type="file" name="file">
+    </form>
+  </ul>
+</section>
+<!-- <section class="members">
+  <div class="itemTitle">Members</div>
+  <ul class="item">
+    <li>
+      <span class="name" {{action clickedName target="view"}}>{{this.name}}</span><span class="remove" {{action clickedRemove target="view"}}>&times;</span>
+    </li>
+  </ul>
+</section> -->

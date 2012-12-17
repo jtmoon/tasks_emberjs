@@ -1,0 +1,30 @@
+{
+    "name": "App"
+  , "version": "0.0.1"
+  , "private": true
+  , "engines": {
+      "node":               "0.8.10"
+    , "npm":                "1.1.65"
+    }
+  , "dependencies": {
+      "express":            "2.5.8"
+    , "handlebars":         ">= 1.0.0-beta.6"
+    , "hbs":                ">= 1.0.0-beta.6"
+    , "mongodb":            ">= 0.0.1"
+    , "connect":            ">= 0.0.1"
+    , "mongoose":           ">= 0.0.1"
+    , "mongoose-types":     ">= 0.0.1"
+    , "passport":           ">= 0.0.1"
+    , "passport-local":     ">= 0.0.1"
+    , "passport-linkedin":  ">= 0.0.1"
+    , "socket.io":          ">= 0.0.1"
+    , "crypto":             ">= 0.0.3"
+    , "nodemailer":         ">= 0.0.1"
+    , "pg":                 ">= 0.0.1"
+    , "node-uuid":          ">= 0.0.1"
+    , "aws2js":             ">= 0.0.1"
+    , "libxml-to-js":       ">= 0.0.1"
+    , "mime-magic":         ">= 0.0.1"
+    , "redis":              ">= 0.0.1"
+  }
+}

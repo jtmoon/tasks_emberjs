@@ -1,0 +1,19 @@
+<header class="localNavHeader">
+  <div class="previous">
+    <button class="btn" data-action="back" {{action goBack}}>&lt;</button>
+  </div>
+  <div class="current">
+  {{view.navTitle}}
+  </div>
+  <div class="currentOptions">
+  </div>
+</header>
+<section class="localNav">
+  <ul class="nav">
+    <li {{bindAttr class=":navItem view.isTasks:active"}} {{action loadTasks this}}>Tasks</li>
+    <!--
+    <li {{bindAttr class=":navItem view.isPeople:active"}} {{action loadPeople this}}>People</li>
+    <li {{bindAttr class=":navItem view.isFiles:active"}} {{action loadFiles this}}>Files</li>
+    -->
+  </ul>
+</section>

@@ -1,0 +1,18 @@
+<header class="localNavHeader">
+  <div class="previous">
+    <button class="btn" data-action="back" {{action goBack}}>&lt;</button>
+  </div>
+  <div class="current">
+  {{view.navTitle}}
+  </div>
+  <div class="currentOptions">
+  </div>
+</header>
+<section class="localNav">
+  <ul class="nav">
+  {{#each controller.content}}
+    {{view App.GlobalNavItemView}}
+  {{/each}}
+  </ul>
+  <button class="btn" {{action new target="controller"}}>New</button>
+</section>
